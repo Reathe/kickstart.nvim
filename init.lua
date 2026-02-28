@@ -536,7 +536,7 @@ require('lazy').setup({
         opts = {},
       },
       -- Maps LSP server names between nvim-lspconfig and Mason package names.
-      'mason-org/mason-lspconfig.nvim',
+      { 'mason-org/mason-lspconfig.nvim', opts = {} },
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
@@ -647,6 +647,17 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
+        basedpyright = {},
+        ruff = {},
+
+        powershell_es = {
+          settings = {
+            powershell = {
+              codeFormatting = { Preset = 'OTBS' }, -- One True Brace Style
+            },
+          },
+        },
+
         -- rust_analyzer = {},
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -703,7 +714,7 @@ require('lazy').setup({
 
       for name, server in pairs(servers) do
         vim.lsp.config(name, server)
-        vim.lsp.enable(name)
+        -- vim.lsp.enable(name) -- not needed if mason-org/mason-lspconfig.nvim is installed (in dependencies of nvim-lspconfig)
       end
     end,
   },
@@ -918,7 +929,7 @@ require('lazy').setup({
     branch = 'main',
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
     config = function()
-      local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+      local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'nu', 'python', 'powershell' }
       require('nvim-treesitter').install(parsers)
       vim.api.nvim_create_autocmd('FileType', {
         callback = function(args)
