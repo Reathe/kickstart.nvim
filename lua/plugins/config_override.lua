@@ -33,8 +33,6 @@ return {
     ---@class PluginLspOpts
     opts = {
       servers = {
-        basedpyright = {},
-        ruff = {},
         powershell_es = {
           settings = {
             powershell = {
